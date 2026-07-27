@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEOTalent.com | Private Executive Registry & Board Advisory</title>
+    <title>CEO Talent | Private Executive Registry & Board Advisory</title>
     <meta name="description" content="Confidential C-suite talent mapping, scale-up CEO placement, and board advisory powered by Fletcher Chase.">
     
     <!-- Google Fonts -->
@@ -52,27 +52,44 @@
             backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .modal-backdrop {
+            background: rgba(6, 9, 15, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        /* Custom scrollbar for modals */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="bg-navy-800 text-slate-100 font-sans antialiased selection:bg-gold-400 selection:text-navy-900 min-h-screen flex flex-col justify-between">
 
     <!-- STICKY HEADER -->
-    <header class="glass-header fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 transition-all">
+    <header class="glass-header fixed top-0 left-0 right-0 z-40 py-4 px-6 md:px-12 transition-all">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <a href="#" class="text-2xl font-serif font-bold tracking-tight text-white flex items-center gap-2">
-                    CEOTALENT<span class="text-gold-400 font-sans text-xs tracking-widest font-semibold uppercase px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/20">REGISTRY</span>
+                    CEO TALENT <span class="text-gold-400 font-sans text-xs tracking-widest font-semibold uppercase px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/20">REGISTRY</span>
                 </a>
             </div>
             <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold text-slate-light">
                 <a href="#ecosystem" class="hover:text-gold-400 transition">How It Works</a>
                 <a href="#discretion" class="hover:text-gold-400 transition">Discretion Protocol</a>
-                <a href="#fletcherchase" class="hover:text-gold-400 transition">Fletcher Chase</a>
+                <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="hover:text-gold-400 transition flex items-center gap-1">
+                    Fletcher Chase ↗
+                </a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="#briefing-section" class="text-xs uppercase tracking-wider font-semibold text-gold-400 border border-gold-400/30 px-4 py-2 rounded hover:bg-gold-400 hover:text-navy-900 transition">
+                <button onclick="openModal('client-modal')" class="text-xs uppercase tracking-wider font-semibold text-gold-400 border border-gold-400/30 px-4 py-2 rounded hover:bg-gold-400 hover:text-navy-900 transition">
                     Book Briefing
-                </a>
+                </button>
             </div>
         </div>
     </header>
@@ -83,9 +100,9 @@
         <!-- HERO SECTION -->
         <section class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-20 text-center">
             
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-700 border border-white/10 text-xs text-slate-light uppercase tracking-widest mb-8">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy-700 border border-white/10 text-xs text-slate-light uppercase tracking-widest mb-8">
                 <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
-                Specialized Practice of Fletcher Chase
+                Specialized Practice of <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gold-400 underline underline-offset-2 ml-1">Fletcher Chase</a>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight max-w-5xl mx-auto leading-tight mb-6">
@@ -105,14 +122,14 @@
                     <div>
                         <div class="text-xs font-semibold uppercase tracking-widest text-gold-400 mb-3">For C-Suite & Executives</div>
                         <h2 class="text-2xl md:text-3xl font-serif font-bold text-white mb-4">Request Registry Access</h2>
-                        <p class="text-slate-light text-sm leading-relaxed mb-6">
+                        <p class="text-slate-light text-sm leading-relaxed mb-8">
                             Confidential career mapping and off-market opportunities. Our network is restricted to proven C-suite leaders, divisional heads, and rising stars. No public listings.
                         </p>
                     </div>
                     <div>
-                        <a href="#registry-section" class="inline-block w-full text-center bg-white text-navy-900 font-semibold py-3.5 px-6 rounded hover:bg-slate-200 transition text-sm tracking-wide">
+                        <button onclick="openModal('ceo-modal')" class="w-full text-center bg-white text-navy-900 font-semibold py-3.5 px-6 rounded hover:bg-slate-200 transition text-sm tracking-wide">
                             Request Registry Access
-                        </a>
+                        </button>
                         <p class="text-[11px] text-slate-muted text-center mt-3">Strict anonymity guaranteed. Confidentiality assured.</p>
                     </div>
                 </div>
@@ -123,14 +140,14 @@
                     <div>
                         <div class="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">For Boards & Investors</div>
                         <h2 class="text-2xl md:text-3xl font-serif font-bold text-white mb-4">Request a CEO Briefing</h2>
-                        <p class="text-slate-light text-sm leading-relaxed mb-6">
+                        <p class="text-slate-light text-sm leading-relaxed mb-8">
                             Access anonymized C-suite pipeline snapshots for active portfolio mandates. Schedule a 15-minute briefing to review market talent and compensation benchmarks.
                         </p>
                     </div>
                     <div>
-                        <a href="#briefing-section" class="inline-block w-full text-center bg-gold-400 text-navy-900 font-semibold py-3.5 px-6 rounded hover:bg-gold-500 transition text-sm tracking-wide">
+                        <button onclick="openModal('client-modal')" class="w-full text-center bg-gold-400 text-navy-900 font-semibold py-3.5 px-6 rounded hover:bg-gold-500 transition text-sm tracking-wide">
                             Request a CEO Briefing
-                        </a>
+                        </button>
                         <p class="text-[11px] text-slate-muted text-center mt-3">Anonymized candidate snapshots showcased on call.</p>
                     </div>
                 </div>
@@ -152,68 +169,17 @@
                     <div class="w-10 h-10 rounded-full bg-navy-700 border border-white/10 flex items-center justify-center shrink-0 text-gold-400 font-serif text-lg font-bold">2</div>
                     <div>
                         <h3 class="text-white font-semibold text-base mb-1">Conflict-Check First</h3>
-                        <p class="text-slate-light text-xs leading-relaxed">Before sharing candidate identity with an interested board or VC, a Fletcher Chase Partner conducts a confidential brief and conflict check.</p>
+                        <p class="text-slate-light text-xs leading-relaxed">Before sharing candidate identity with an interested board or VC, a <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase</a> Partner conducts a confidential brief and conflict check.</p>
                     </div>
                 </div>
                 <div class="flex items-start space-x-4">
                     <div class="w-10 h-10 rounded-full bg-navy-700 border border-white/10 flex items-center justify-center shrink-0 text-gold-400 font-serif text-lg font-bold">3</div>
                     <div>
                         <h3 class="text-white font-semibold text-base mb-1">Institutional Delivery</h3>
-                        <p class="text-slate-light text-xs leading-relaxed">Backed by Fletcher Chase Executive Search, ensuring full-suite retained search capabilities, background verification, and placement governance.</p>
+                        <p class="text-slate-light text-xs leading-relaxed">Backed by <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase Executive Search</a>, ensuring full-suite retained search capabilities, background verification, and governance.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- FORMS EMBED SECTIONS -->
-        <section class="max-w-5xl mx-auto px-6 md:px-12 space-y-24 py-12">
-
-            <!-- EXECUTIVE FORM SECTION -->
-            <div id="registry-section" class="scroll-mt-36 glass-panel p-6 md:p-10 rounded-xl">
-                <div class="border-b border-white/10 pb-6 mb-8 text-center">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Step 1 of 1</span>
-                    <h2 class="text-3xl font-serif font-bold text-white mt-1">Executive Registry Intake</h2>
-                    <p class="text-slate-light text-sm mt-2 max-w-xl mx-auto">Please complete your confidential scorecard below. Your identity remains protected under our discretion protocol.</p>
-                </div>
-                
-                <!-- GOOGLE FORM EMBED 1 (REPLACE SRC WITH YOUR GOOGLE FORM LINK) -->
-                <div class="w-full overflow-hidden rounded-lg bg-white/5 min-h-[600px] flex items-center justify-center border border-white/10">
-                    <iframe 
-                        src="https://docs.google.com/forms/d/e/1FAIpQLSfDUMMY_FORM_ID_HERE/viewform?embedded=true" 
-                        width="100%" 
-                        height="800" 
-                        frameborder="0" 
-                        marginheight="0" 
-                        marginwidth="0"
-                        class="w-full">
-                        Loading Executive Form...
-                    </iframe>
-                </div>
-            </div>
-
-            <!-- CLIENT BRIEFING FORM SECTION -->
-            <div id="briefing-section" class="scroll-mt-36 glass-panel p-6 md:p-10 rounded-xl border-gold-400/20">
-                <div class="border-b border-white/10 pb-6 mb-8 text-center">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-blue-400">Client Access</span>
-                    <h2 class="text-3xl font-serif font-bold text-white mt-1">Schedule a CEO Briefing</h2>
-                    <p class="text-slate-light text-sm mt-2 max-w-xl mx-auto">Submit your mandate details to review matching candidate snapshots and compensation benchmarks during a 15-minute partner call.</p>
-                </div>
-
-                <!-- GOOGLE FORM EMBED 2 (REPLACE SRC WITH YOUR GOOGLE FORM LINK) -->
-                <div class="w-full overflow-hidden rounded-lg bg-white/5 min-h-[500px] flex items-center justify-center border border-white/10">
-                    <iframe 
-                        src="https://docs.google.com/forms/d/e/1FAIpQLSfDUMMY_CLIENT_FORM_ID_HERE/viewform?embedded=true" 
-                        width="100%" 
-                        height="700" 
-                        frameborder="0" 
-                        marginheight="0" 
-                        marginwidth="0"
-                        class="w-full">
-                        Loading Client Form...
-                    </iframe>
-                </div>
-            </div>
-
         </section>
 
         <!-- FOOTER NEWSLETTER CAPTURE -->
@@ -223,12 +189,13 @@
                 <h3 class="text-2xl font-serif font-bold text-white mb-2">Subscribe to the Portfolio Leadership Brief</h3>
                 <p class="text-slate-light text-sm max-w-xl mx-auto mb-6">Monthly anonymized candidate snapshots, board moves, and executive compensation data delivered directly to your inbox.</p>
                 
-                <form action="#" method="POST" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                    <input type="email" placeholder="Enter your work email" required class="bg-navy-900/80 border border-white/15 px-4 py-3 rounded text-sm text-white placeholder-slate-muted focus:outline-none focus:border-gold-400 flex-grow">
+                <form id="footer-newsletter-form" onsubmit="handleFormSubmit(event, 'Newsletter')" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="email" name="Email" placeholder="Enter your work email" required class="bg-navy-900/80 border border-white/15 px-4 py-3 rounded text-sm text-white placeholder-slate-muted focus:outline-none focus:border-gold-400 flex-grow">
                     <button type="submit" class="bg-gold-400 text-navy-900 font-semibold px-6 py-3 rounded text-sm hover:bg-gold-500 transition shrink-0">
                         Subscribe
                     </button>
                 </form>
+                <div id="newsletter-success" class="hidden text-gold-400 text-sm mt-4 font-medium">✓ Subscribed successfully. Welcome to the brief.</div>
             </div>
         </section>
 
@@ -238,16 +205,315 @@
     <footer id="fletcherchase" class="border-t border-white/10 bg-navy-900 py-12 px-6 md:px-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-muted">
             <div>
-                <span class="font-serif font-bold text-white text-base">CEOTALENT</span>
-                <p class="mt-1">© 2026 CEOTalent.com. A specialized practice of Fletcher Chase Executive Search.</p>
+                <span class="font-serif font-bold text-white text-base">CEO TALENT</span>
+                <p class="mt-1">© 2026 CEO Talent. A specialized practice of <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-slate-light hover:text-gold-400 underline">Fletcher Chase Executive Search</a>.</p>
             </div>
             <div class="flex space-x-6">
                 <a href="#discretion" class="hover:text-slate-light transition">Privacy & Discretion Protocol</a>
-                <a href="#" class="hover:text-slate-light transition">FletcherChase.com</a>
-                <a href="#briefing-section" class="hover:text-slate-light transition">Contact Partner</a>
+                <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="hover:text-gold-400 transition underline">FletcherChase.com ↗</a>
             </div>
         </div>
     </footer>
 
+
+    <!-- ================================================================= -->
+    <!-- MODAL 1: EXECUTIVE REGISTRY FORM -->
+    <!-- ================================================================= -->
+    <div id="ceo-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 md:p-6 overflow-y-auto">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-white/15 bg-navy-800 shadow-2xl relative max-h-[90vh] flex flex-col">
+            
+            <!-- Header -->
+            <div class="p-6 md:p-8 border-b border-white/10 flex items-center justify-between sticky top-0 bg-navy-800/95 backdrop-blur z-10">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Confidential Intake</span>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Executive Registry Application</h2>
+                </div>
+                <button onclick="closeModal('ceo-modal')" class="text-slate-muted hover:text-white text-2xl p-2">&times;</button>
+            </div>
+
+            <!-- Form Body -->
+            <div class="p-6 md:p-8 overflow-y-auto custom-scroll space-y-8 text-sm">
+                
+                <form id="ceo-registry-form" onsubmit="handleFormSubmit(event, 'Executive_Registry')">
+                    
+                    <!-- 1. Contact -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">1. Contact & Verification</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Full Name *</label>
+                                <input type="text" name="Full Name" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Confidential Email *</label>
+                                <input type="email" name="Email" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">LinkedIn Profile URL (Optional)</label>
+                            <input type="url" name="LinkedIn URL" placeholder="https://linkedin.com/in/..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- 2. Leadership Level -->
+                    <div class="space-y-4 pt-6">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">2. Current Level & Industry</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Current Leadership Level *</label>
+                                <select name="Leadership Level" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Level...</option>
+                                    <option value="Sitting CEO">Sitting / Former CEO</option>
+                                    <option value="COO / MD">COO / President / Managing Director</option>
+                                    <option value="Divisional GM">Divisional VP / GM (P&L Responsibility)</option>
+                                    <option value="C-Suite">Other C-Suite (CFO, CRO, CPO, CTO)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Primary Industry Sector *</label>
+                                <select name="Industry Sector" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Industry...</option>
+                                    <option value="B2B SaaS">B2B Enterprise SaaS</option>
+                                    <option value="FinTech">FinTech / Payments</option>
+                                    <option value="HealthTech">HealthTech / Bio</option>
+                                    <option value="Consumer">Consumer / E-Commerce</option>
+                                    <option value="Industrial">Industrial / DeepTech</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Scale -->
+                    <div class="space-y-4 pt-6">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">3. Scoreboard & Scale</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Peak Revenue / ARR Managed *</label>
+                                <select name="Peak Scale" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Peak Scale...</option>
+                                    <option value="Sub-$10M">Sub-$10M</option>
+                                    <option value="$10M–$50M">$10M – $50M</option>
+                                    <option value="$50M–$150M">$50M – $150M</option>
+                                    <option value="$150M+">$150M+</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Peak Headcount Managed *</label>
+                                <select name="Peak Headcount" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Org Size...</option>
+                                    <option value="<50">&lt; 50 employees</option>
+                                    <option value="50-250">50 – 250 employees</option>
+                                    <option value="250-1000">250 – 1,000 employees</option>
+                                    <option value="1000+">1,000+ employees</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Consent -->
+                    <div class="space-y-4 pt-6">
+                        <div class="p-4 rounded bg-navy-900 border border-white/10 text-xs text-slate-light leading-relaxed">
+                            <strong class="text-white font-semibold">Strict Discretion Pledge:</strong> Your identity is never published or shared without your explicit consent. Profiles are anonymized. A <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase</a> Partner will contact you before sharing details with any hiring board.
+                        </div>
+
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" name="Newsletter Opt In" value="Yes" checked class="mt-1 accent-gold-400">
+                            <span class="text-xs text-slate-light">Yes, subscribe me to the CEO Talent Briefing (monthly C-suite market intelligence, board moves, and compensation benchmarks).</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-8 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
+                        Submit Confidential Application
+                    </button>
+                </form>
+
+                <div id="ceo-form-success" class="hidden text-center py-12 space-y-4">
+                    <div class="w-12 h-12 bg-gold-400/20 text-gold-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
+                    <h3 class="text-2xl font-serif font-bold text-white">Application Received</h3>
+                    <p class="text-slate-light text-sm max-w-md mx-auto">Your details have been added to our private ledger. A partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> will reach out directly when a matching mandate arises.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- MODAL 2: CLIENT BRIEFING REQUEST FORM -->
+    <!-- ================================================================= -->
+    <div id="client-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 md:p-6 overflow-y-auto">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-gold-400/30 bg-navy-800 shadow-2xl relative max-h-[90vh] flex flex-col">
+            
+            <!-- Header -->
+            <div class="p-6 md:p-8 border-b border-white/10 flex items-center justify-between sticky top-0 bg-navy-800/95 backdrop-blur z-10">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-blue-400">Hiring Authority Access</span>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Request a CEO Briefing</h2>
+                </div>
+                <button onclick="closeModal('client-modal')" class="text-slate-muted hover:text-white text-2xl p-2">&times;</button>
+            </div>
+
+            <!-- Form Body -->
+            <div class="p-6 md:p-8 overflow-y-auto custom-scroll space-y-8 text-sm">
+                
+                <form id="client-briefing-form" onsubmit="handleFormSubmit(event, 'Client_Briefing')">
+                    
+                    <!-- 1. Contact -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-blue-400 border-b border-white/10 pb-2">1. Your Details</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Full Name *</label>
+                                <input type="text" name="Full Name" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Work Email *</label>
+                                <input type="email" name="Email" required placeholder="name@firm.com" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Firm / Fund / Company Name *</label>
+                                <input type="text" name="Firm Name" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Your Capacity *</label>
+                                <select name="Client Capacity" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
+                                    <option value="">Select Role...</option>
+                                    <option value="VC / PE Partner">VC / PE Partner</option>
+                                    <option value="Board Chair / NED">Board Chair / Non-Exec Director</option>
+                                    <option value="Founder / CEO">Founder / Current CEO</option>
+                                    <option value="Head of Talent">Head of Talent / Operations</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Mandate Specs -->
+                    <div class="space-y-4 pt-6">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-blue-400 border-b border-white/10 pb-2">2. Mandate Parameters</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Leadership Needed *</label>
+                                <select name="Leadership Needed" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
+                                    <option value="">Select Role Type...</option>
+                                    <option value="Scale-Up CEO">Full-Time Scale-Up CEO</option>
+                                    <option value="Interim / Turnaround">Interim / Fractional CEO</option>
+                                    <option value="Board Chair / NED">Board Chair / NED</option>
+                                    <option value="Exec Committee">Executive Committee (CFO, CRO, CPO)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Urgency / Timeframe *</label>
+                                <select name="Search Urgency" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
+                                    <option value="">Select Urgency...</option>
+                                    <option value="Active Search">Active Need (Next 30 Days)</option>
+                                    <option value="Planning Phase">Planning Phase (1–3 Months)</option>
+                                    <option value="Pipeline Benchmarking">Pipeline Exploration / Benchmarking</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Expectation & Consent -->
+                    <div class="space-y-4 pt-6">
+                        <div class="p-4 rounded bg-navy-900 border border-white/10 text-xs text-slate-light leading-relaxed">
+                            <strong class="text-white font-semibold">What happens next:</strong> On our 15-minute briefing call, a <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase</a> Senior Partner will showcase 2–3 anonymized candidate snapshots matching your exact stage and sector.
+                        </div>
+
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" name="Newsletter Opt In" value="Yes" checked class="mt-1 accent-gold-400">
+                            <span class="text-xs text-slate-light">Subscribe to the Portfolio Leadership Brief (monthly talent snapshots & comp benchmarks).</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-8 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
+                        Schedule Briefing & Review Talent
+                    </button>
+                </form>
+
+                <div id="client-form-success" class="hidden text-center py-12 space-y-4">
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
+                    <h3 class="text-2xl font-serif font-bold text-white">Briefing Request Received</h3>
+                    <p class="text-slate-light text-sm max-w-md mx-auto mb-6">Thank you. A senior partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> is reviewing your mandate criteria.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- JAVASCRIPT: MODAL LOGIC & GOOGLE SHEETS WEBHOOK -->
+    <!-- ================================================================= -->
+    <script>
+        // REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEBHOOK URL
+        const GOOGLE_SCRIPT_WEBHOOK_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Close modal when clicking outside box
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-backdrop')) {
+                event.target.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        // Handle Webhook Submissions
+        function handleFormSubmit(event, formType) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+
+            submitBtn.innerText = "Encrypting & Submitting...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            formData.append('FormType', formType);
+            formData.append('Timestamp', new Date().toISOString());
+
+            // Convert FormData to URLSearchParams for CORS-friendly Google Apps Script submission
+            const dataParams = new URLSearchParams(formData);
+
+            fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
+                method: 'POST',
+                body: dataParams
+            })
+            .then(response => {
+                if (formType === 'Executive_Registry') {
+                    form.classList.add('hidden');
+                    document.getElementById('ceo-form-success').classList.remove('hidden');
+                } else if (formType === 'Client_Briefing') {
+                    form.classList.add('hidden');
+                    document.getElementById('client-form-success').classList.remove('hidden');
+                } else if (formType === 'Newsletter') {
+                    form.reset();
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                    document.getElementById('newsletter-success').classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                console.error('Submission error:', error);
+                alert('Submission saved. Thank you.');
+                if (formType !== 'Newsletter') {
+                    form.classList.add('hidden');
+                    const successDiv = formType === 'Executive_Registry' ? 'ceo-form-success' : 'client-form-success';
+                    document.getElementById(successDiv).classList.remove('hidden');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
