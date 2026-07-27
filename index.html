@@ -291,14 +291,26 @@
                     <div class="space-y-4 pt-4">
                         <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">3. Executive Scoreboard & Scale</h3>
                         <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Peak Revenue / ARR Managed *</label>
+                           <div>
+                                <label class="block text-xs text-slate-light mb-1">Peak Scale Managed *</label>
                                 <select name="Peak Scale" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
-                                    <option value="">Select Revenue Scale...</option>
-                                    <option value="Sub-$10M">Sub-$10M</option>
-                                    <option value="$10M–$50M">$10M – $50M</option>
-                                    <option value="$50M–$150M">$50M – $150M</option>
-                                    <option value="$150M+">$150M+</option>
+                                    <option value="">Select Scale & Metric...</option>
+                                    
+                                    <!-- ARR (Subscription & SaaS) -->
+                                    <optgroup label="Annual Recurring Revenue (ARR)" class="bg-navy-800 text-gold-400 font-semibold">
+                                        <option value="Sub-$10M ARR" class="text-white font-normal">Sub-$10M ARR</option>
+                                        <option value="$10M–$50M ARR" class="text-white font-normal">$10M – $50M ARR</option>
+                                        <option value="$10M–$50M ARR" class="text-white font-normal">$50M – $150M ARR</option>
+                                        <option value="$150M+ ARR" class="text-white font-normal">$150M+ ARR</option>
+                                    </optgroup>
+                            
+                                    <!-- Revenue / P&L (Services, Industrial, Corporate) -->
+                                    <optgroup label="Overall Revenue / P&L" class="bg-navy-800 text-gold-400 font-semibold">
+                                        <option value="Sub-$10M Revenue" class="text-white font-normal">Sub-$10M Revenue / P&L</option>
+                                        <option value="$10M–$50M Revenue" class="text-white font-normal">$10M – $50M Revenue / P&L</option>
+                                        <option value="$50M–$150M Revenue" class="text-white font-normal">$50M – $150M Revenue / P&L</option>
+                                        <option value="$150M+ Revenue" class="text-white font-normal">$150M+ Revenue / P&L</option>
+                                    </optgroup>
                                 </select>
                             </div>
                             <div>
