@@ -102,11 +102,11 @@
             
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy-700 border border-white/10 text-xs text-slate-light uppercase tracking-widest mb-8">
                 <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
-                Specialized Practice of <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gold-400 underline underline-offset-2 ml-1">Fletcher Chase</a>
+                Specialised Practice of <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gold-400 underline underline-offset-2 ml-1">Fletcher Chase</a>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight max-w-5xl mx-auto leading-tight mb-6">
-    The Private C-Suite Executive Search Registry
+            The Private C-Suite Executive Search Registry
             </h1>
 
             <p class="text-lg md:text-xl text-slate-light max-w-3xl mx-auto mb-16 font-light leading-relaxed">
@@ -206,7 +206,7 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-muted">
             <div>
                 <span class="font-serif font-bold text-white text-base">CEO TALENT</span>
-                <p class="mt-1">© 2026 CEO Talent. A specialized practice of <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-slate-light hover:text-gold-400 underline">Fletcher Chase Executive Search</a>.</p>
+                <p class="mt-1">© 2026 CEO Talent. A specialised practice of <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-slate-light hover:text-gold-400 underline">Fletcher Chase Executive Search</a>.</p>
             </div>
             <div class="flex space-x-6">
                 <a href="#discretion" class="hover:text-slate-light transition">Privacy & Discretion Protocol</a>
@@ -367,32 +367,51 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 5. Target Roles & Compensation Floor -->
+                   <!-- 5. Target Mandate & Compensation Parameters -->
                     <div class="space-y-4 pt-4">
-                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">5. Target Mandate & Compensation Parameters</h3>
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">
+                            5. Target Mandate & Compensation Parameters
+                        </h3>
+                        
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs text-slate-light mb-1">Target Position Type *</label>
+                                <label class="block text-xs text-slate-light mb-1">Target Role Type *</label>
                                 <select name="Target Role Type" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
-                                    <option value="">Select Target...</option>
+                                    <option value="">Select Target Role...</option>
                                     <option value="Full-Time Scale-Up CEO">Full-Time Scale-Up CEO</option>
                                     <option value="PE Operating Partner / Turnaround CEO">PE Operating Partner / Turnaround CEO</option>
                                     <option value="Board Chair / Non-Executive Director">Board Chair / Non-Exec Director</option>
                                     <option value="Interim / Fractional C-Suite">Interim / Fractional CEO/COO</option>
                                 </select>
                             </div>
+                    
                             <div>
-                                <label class="block text-xs text-slate-light mb-1">Minimum Base Salary Expectation *</label>
-                                <select name="Compensation Floor" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
-                                    <option value="">Select Base Floor...</option>
-                                    <option value="£150k–£250k / $200k–$300k">£150k–£250k / $200k–$300k</option>
-                                    <option value="£250k–£400k / $300k–$500k">£250k–£400k / $300k–$500k</option>
-                                    <option value="£400k+ / $500k+">£400k+ / $500k+</option>
-                                    <option value="Equity / Board Fee Primary">Equity / Board Retainer Primary</option>
+                                <label class="block text-xs text-slate-light mb-1">Primary Incentive Preference *</label>
+                                <select name="Incentive Preference" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Primary Focus...</option>
+                                    <option value="Equity-First / High Upside">Equity-First / Growth Upside</option>
+                                    <option value="Balanced Cash & Equity">Balanced Cash & Long-Term Equity</option>
+                                    <option value="PE Carry / Value Creation">PE Carry / Value Creation Playbook</option>
+                                    <option value="Board Retainer / Equity">Board Retainer / Advisory Equity</option>
+                                    <option value="Cash / Day-Rate Primary (Interim)">Cash / Day-Rate Primary (Interim)</option>
                                 </select>
                             </div>
                         </div>
+                    
+                        <!-- Multi-Currency Optional Base Floor -->
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">
+                                Target Base Salary Floor <span class="text-slate-muted font-normal">(Optional — Multi-Currency)</span>
+                            </label>
+                            <select name="Compensation Floor" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <option value="Not Disclosed / Open to Negotiation">Open to Negotiation / Structure Dependent</option>
+                                <option value="£150k–£225k / €175k–€260k / $200k–$300k">£150k–£225k / €175k–€260k / $200k–$300k Base</option>
+                                <option value="£225k–£350k / €260k–€400k / $300k–$450k">£225k–£350k / €260k–€400k / $300k–$450k Base</option>
+                                <option value="£350k+ / €400k+ / $450k+">£350k+ / €400k+ / $450k+ Base</option>
+                                <option value="Board / Advisory Fee Primary">Board Retainer / Advisory Fee Primary</option>
+                            </select>
+                        </div>
+                    
                         <div>
                             <label class="block text-xs text-slate-light mb-1">Key Successes or Mandate Preferences (Optional)</label>
                             <textarea name="Executive Highlights" rows="2" placeholder="Brief note on notable exits, ARR growth velocity, or specific mandate requirements..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none resize-none"></textarea>
