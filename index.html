@@ -219,6 +219,9 @@
     <!-- ================================================================= -->
     <!-- MODAL 1: EXECUTIVE REGISTRY FORM -->
     <!-- ================================================================= -->
+   <!-- ================================================================= -->
+    <!-- MODAL 1: EXECUTIVE REGISTRY FORM (ENRICHED SCORECARD) -->
+    <!-- ================================================================= -->
     <div id="ceo-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 md:p-6 overflow-y-auto">
         <div class="glass-panel w-full max-w-3xl rounded-2xl border border-white/15 bg-navy-800 shadow-2xl relative max-h-[90vh] flex flex-col">
             
@@ -236,7 +239,7 @@
                 
                 <form id="ceo-registry-form" onsubmit="handleFormSubmit(event, 'Executive_Registry')">
                     
-                    <!-- 1. Contact -->
+                    <!-- 1. Contact & Verification -->
                     <div class="space-y-4">
                         <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">1. Contact & Verification</h3>
                         <div class="grid md:grid-cols-2 gap-4">
@@ -250,14 +253,14 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-light mb-1">LinkedIn Profile URL (Optional)</label>
-                            <input type="url" name="LinkedIn URL" placeholder="https://linkedin.com/in/..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            <label class="block text-xs text-slate-light mb-1">LinkedIn Profile URL *</label>
+                            <input type="url" name="LinkedIn URL" required placeholder="https://linkedin.com/in/..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                         </div>
                     </div>
 
-                    <!-- 2. Leadership Level -->
-                    <div class="space-y-4 pt-6">
-                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">2. Current Level & Industry</h3>
+                    <!-- 2. Leadership Level & Sector -->
+                    <div class="space-y-4 pt-4">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">2. Leadership Level & Domain Expertise</h3>
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs text-slate-light mb-1">Current Leadership Level *</label>
@@ -275,7 +278,7 @@
                                     <option value="">Select Industry...</option>
                                     <option value="B2B SaaS">B2B Enterprise SaaS</option>
                                     <option value="FinTech">FinTech / Payments</option>
-                                    <option value="HealthTech">HealthTech / Bio</option>
+                                    <option value="HealthTech">HealthTech / Life Sciences</option>
                                     <option value="Consumer">Consumer / E-Commerce</option>
                                     <option value="Industrial">Industrial / DeepTech</option>
                                     <option value="Other">Other</option>
@@ -284,14 +287,14 @@
                         </div>
                     </div>
 
-                    <!-- 3. Scale -->
-                    <div class="space-y-4 pt-6">
-                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">3. Scoreboard & Scale</h3>
+                    <!-- 3. Executive Scoreboard -->
+                    <div class="space-y-4 pt-4">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">3. Executive Scoreboard & Scale</h3>
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs text-slate-light mb-1">Peak Revenue / ARR Managed *</label>
                                 <select name="Peak Scale" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
-                                    <option value="">Select Peak Scale...</option>
+                                    <option value="">Select Revenue Scale...</option>
                                     <option value="Sub-$10M">Sub-$10M</option>
                                     <option value="$10M–$50M">$10M – $50M</option>
                                     <option value="$50M–$150M">$50M – $150M</option>
@@ -309,21 +312,94 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Capital / Deal Experience *</label>
+                                <select name="Capital Background" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Capital Background...</option>
+                                    <option value="Venture Backed">Venture Backed (Series A-D)</option>
+                                    <option value="PE / LBO Buyout">Private Equity / LBO Turnaround</option>
+                                    <option value="Bootstrapped / Profitable">Bootstrapped / High-Growth Profitable</option>
+                                    <option value="Public Company">Public / Listed Corporation</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Primary Value Creation Playbook *</label>
+                                <select name="Execution Specialization" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Primary Focus...</option>
+                                    <option value="0-to-1 / Early Scale">0-to-1 Early Stage Scaling</option>
+                                    <option value="Hypergrowth GTM">Hypergrowth GTM / Commercial Engine</option>
+                                    <option value="PE Turnaround / Cost Realignment">PE Turnaround & Operational Efficiency</option>
+                                    <option value="M&A / Buy-and-Build">M&A Rollups & Post-Merger Integration</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- 4. Consent -->
-                    <div class="space-y-4 pt-6">
+                    <!-- 4. Location & Mobility -->
+                    <div class="space-y-4 pt-4">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">4. Location & Geographic Mobility</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Current Base Location *</label>
+                                <input type="text" name="Current Location" required placeholder="e.g. London, UK or New York, US" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Relocation / Travel Flexibility *</label>
+                                <select name="Relocation Preference" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Preference...</option>
+                                    <option value="Open to Relocation">Open to Global / Regional Relocation</option>
+                                    <option value="Hybrid / Travel Only">Hybrid (Open to Frequent Travel)</option>
+                                    <option value="Remote / Local Only">Remote or Local Market Only</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Target Roles & Compensation Floor -->
+                    <div class="space-y-4 pt-4">
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">5. Target Mandate & Compensation Parameters</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Target Position Type *</label>
+                                <select name="Target Role Type" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Target...</option>
+                                    <option value="Full-Time Scale-Up CEO">Full-Time Scale-Up CEO</option>
+                                    <option value="PE Operating Partner / Turnaround CEO">PE Operating Partner / Turnaround CEO</option>
+                                    <option value="Board Chair / Non-Executive Director">Board Chair / Non-Exec Director</option>
+                                    <option value="Interim / Fractional C-Suite">Interim / Fractional CEO/COO</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Minimum Base Salary Expectation *</label>
+                                <select name="Compensation Floor" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Base Floor...</option>
+                                    <option value="£150k–£250k / $200k–$300k">£150k–£250k / $200k–$300k</option>
+                                    <option value="£250k–£400k / $300k–$500k">£250k–£400k / $300k–$500k</option>
+                                    <option value="£400k+ / $500k+">£400k+ / $500k+</option>
+                                    <option value="Equity / Board Fee Primary">Equity / Board Retainer Primary</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Key Successes or Mandate Preferences (Optional)</label>
+                            <textarea name="Executive Highlights" rows="2" placeholder="Brief note on notable exits, ARR growth velocity, or specific mandate requirements..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none resize-none"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 6. Discretion Pledge & Consent -->
+                    <div class="space-y-4 pt-4">
                         <div class="p-4 rounded bg-navy-900 border border-white/10 text-xs text-slate-light leading-relaxed">
                             <strong class="text-white font-semibold">Strict Discretion Pledge:</strong> Your identity is never published or shared without your explicit consent. Profiles are anonymized. A <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase</a> Partner will contact you before sharing details with any hiring board.
                         </div>
 
                         <label class="flex items-start space-x-3 cursor-pointer">
                             <input type="checkbox" name="Newsletter Opt In" value="Yes" checked class="mt-1 accent-gold-400">
-                            <span class="text-xs text-slate-light">Yes, subscribe me to the CEO Talent Briefing (monthly C-suite market intelligence, board moves, and compensation benchmarks).</span>
+                            <span class="text-xs text-slate-light">Subscribe me to the CEO Talent Briefing (monthly C-suite market intelligence, board moves, and compensation benchmarks).</span>
                         </label>
                     </div>
 
-                    <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-8 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
+                    <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-6 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
                         Submit Confidential Application
                     </button>
                 </form>
