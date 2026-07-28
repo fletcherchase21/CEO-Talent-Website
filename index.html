@@ -454,7 +454,9 @@
                 <div id="ceo-form-success" class="hidden text-center py-12 space-y-4">
                     <div class="w-12 h-12 bg-gold-400/20 text-gold-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
                     <h3 class="text-2xl font-serif font-bold text-white">Application Received</h3>
-                    <p class="text-slate-light text-sm max-w-md mx-auto">Your details have been added to our private ledger. A partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> will reach out directly when a matching mandate arises.</p>
+                    <!-- Display generated Candidate Reference ID -->
+                    <p class="candidate-id-display text-gold-400 font-mono text-xs uppercase tracking-widest bg-navy-900 inline-block px-4 py-2 rounded border border-white/10"></p>
+                    <p class="text-slate-light text-sm max-w-md mx-auto">Your details have been added to our private ledger. Please take note of your Reference ID. A partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> will reach out directly when a matching mandate arises.</p>
                 </div>
     
             </div>
@@ -567,75 +569,91 @@
 
 
     <!-- ================================================================= -->
-    <!-- JAVASCRIPT: MODAL LOGIC & GOOGLE SHEETS WEBHOOK -->
-    <!-- ================================================================= -->
-    <script>
-        // REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEBHOOK URL
-        const GOOGLE_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyex2JT9nSaDDXh48Wxj5blj1_WE3lrfgpTLSVh-Lfza_mEWTnPFMD_my-9LVWn2SjfEw/exec";
+<!-- JAVASCRIPT: MODAL LOGIC & GOOGLE SHEETS WEBHOOK -->
+<!-- ================================================================= -->
+<script>
+    // Paste your deployed Google Apps Script Web App URL here
+    const GOOGLE_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyex2JT9nSaDDXh48Wxj5blj1_WE3lrfgpTLSVh-Lfza_mEWTnPFMD_my-9LVWn2SjfEw/exec";
 
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
 
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    // Close modal when clicking outside box
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal-backdrop')) {
+            event.target.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
         }
+    }
 
-        // Close modal when clicking outside box
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-backdrop')) {
-                event.target.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
+    // Handle Webhook Submissions
+    function handleFormSubmit(event, formType) {
+        event.preventDefault();
+        const form = event.target;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerText;
+
+        submitBtn.innerText = "Encrypting & Submitting...";
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+        formData.append('FormType', formType);
+
+        // Convert FormData to URLSearchParams for Google Apps Script compatibility
+        const dataParams = new URLSearchParams(formData);
+
+        fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
+            method: 'POST',
+            body: dataParams
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (formType === 'Executive_Registry') {
+                form.classList.add('hidden');
+                
+                // If a Candidate ID was generated, display it in the success div
+                const successDiv = document.getElementById('ceo-form-success');
+                if (data.candidateID) {
+                    const idTag = successDiv.querySelector('.candidate-id-display');
+                    if (idTag) {
+                        idTag.innerText = "Your Candidate ID: " + data.candidateID;
+                    }
+                }
+                successDiv.classList.remove('hidden');
+
+            } else if (formType === 'Client_Briefing') {
+                form.classList.add('hidden');
+                document.getElementById('client-form-success').classList.remove('hidden');
+
+            } else if (formType === 'Newsletter') {
+                form.reset();
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                document.getElementById('newsletter-success').classList.remove('hidden');
             }
-        }
-
-        // Handle Webhook Submissions
-        function handleFormSubmit(event, formType) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerText;
-
-            submitBtn.innerText = "Encrypting & Submitting...";
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-            formData.append('FormType', formType);
-            formData.append('Timestamp', new Date().toISOString());
-
-            // Convert FormData to URLSearchParams for CORS-friendly Google Apps Script submission
-            const dataParams = new URLSearchParams(formData);
-
-            fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
-                method: 'POST',
-                body: dataParams
-            })
-            .then(response => {
-                if (formType === 'Executive_Registry') {
-                    form.classList.add('hidden');
-                    document.getElementById('ceo-form-success').classList.remove('hidden');
-                } else if (formType === 'Client_Briefing') {
-                    form.classList.add('hidden');
-                    document.getElementById('client-form-success').classList.remove('hidden');
-                } else if (formType === 'Newsletter') {
-                    form.reset();
-                    submitBtn.innerText = originalBtnText;
-                    submitBtn.disabled = false;
-                    document.getElementById('newsletter-success').classList.remove('hidden');
-                }
-            })
-            .catch(error => {
-                console.error('Submission error:', error);
-                alert('Submission saved. Thank you.');
-                if (formType !== 'Newsletter') {
-                    form.classList.add('hidden');
-                    const successDiv = formType === 'Executive_Registry' ? 'ceo-form-success' : 'client-form-success';
-                    document.getElementById(successDiv).classList.remove('hidden');
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+        })
+        .catch(error => {
+            console.error('Submission error:', error);
+            // Fallback gracefully if browser cross-origin limits block JSON parsing
+            if (formType === 'Executive_Registry') {
+                form.classList.add('hidden');
+                document.getElementById('ceo-form-success').classList.remove('hidden');
+            } else if (formType === 'Client_Briefing') {
+                form.classList.add('hidden');
+                document.getElementById('client-form-success').classList.remove('hidden');
+            } else if (formType === 'Newsletter') {
+                form.reset();
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                document.getElementById('newsletter-success').classList.remove('hidden');
+            }
+        });
+    }
+</script>
