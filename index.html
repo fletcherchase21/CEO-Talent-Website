@@ -454,9 +454,11 @@
                 <div id="ceo-form-success" class="hidden text-center py-12 space-y-4">
                     <div class="w-12 h-12 bg-gold-400/20 text-gold-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
                     <h3 class="text-2xl font-serif font-bold text-white">Application Received</h3>
-                    <!-- Display generated Candidate Reference ID -->
-                    <p class="candidate-id-display text-gold-400 font-mono text-xs uppercase tracking-widest bg-navy-900 inline-block px-4 py-2 rounded border border-white/10"></p>
-                    <p class="text-slate-light text-sm max-w-md mx-auto">Your details have been added to our private ledger. Please take note of your Reference ID. A partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> will reach out directly when a matching mandate arises.</p>
+                    
+                    <!-- This element receives and displays the ID -->
+                    <p class="candidate-id-display text-gold-400 font-mono text-sm uppercase tracking-widest bg-navy-900 inline-block px-4 py-2 rounded border border-white/10 font-bold"></p>
+                    
+                    <p class="text-slate-light text-sm max-w-md mx-auto">Your details have been added to our private ledger. Please take note of your Reference ID. A partner at Fletcher Chase will reach out directly when a matching mandate arises.</p>
                 </div>
     
             </div>
@@ -568,11 +570,10 @@
     </div>
 
 
-    <!-- ================================================================= -->
+<!-- ================================================================= -->
 <!-- JAVASCRIPT: MODAL LOGIC & GOOGLE SHEETS WEBHOOK -->
 <!-- ================================================================= -->
 <script>
-    // Paste your deployed Google Apps Script Web App URL here
     const GOOGLE_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyex2JT9nSaDDXh48Wxj5blj1_WE3lrfgpTLSVh-Lfza_mEWTnPFMD_my-9LVWn2SjfEw/exec";
 
     function openModal(id) {
@@ -585,7 +586,6 @@
         document.body.classList.remove('overflow-hidden');
     }
 
-    // Close modal when clicking outside box
     window.onclick = function(event) {
         if (event.target.classList.contains('modal-backdrop')) {
             event.target.classList.add('hidden');
@@ -593,7 +593,6 @@
         }
     }
 
-    // Handle Webhook Submissions
     function handleFormSubmit(event, formType) {
         event.preventDefault();
         const form = event.target;
@@ -603,10 +602,17 @@
         submitBtn.innerText = "Encrypting & Submitting...";
         submitBtn.disabled = true;
 
+        // Generate instant local reference ID so the user is never left waiting
+        const fallbackID = (formType === 'Client_Briefing' ? 'BRIEF-' : 'CEOT-') + Math.floor(1000 + Math.random() * 9000);
+
         const formData = new FormData(form);
         formData.append('FormType', formType);
 
-        // Convert FormData to URLSearchParams for Google Apps Script compatibility
+        // Ensure unchecked checkbox sends "No" explicitly
+        if (!formData.has('Newsletter Opt In')) {
+            formData.append('Newsletter Opt In', 'No');
+        }
+
         const dataParams = new URLSearchParams(formData);
 
         fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
@@ -615,45 +621,39 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (formType === 'Executive_Registry') {
-                form.classList.add('hidden');
-                
-                // If a Candidate ID was generated, display it in the success div
-                const successDiv = document.getElementById('ceo-form-success');
-                if (data.candidateID) {
-                    const idTag = successDiv.querySelector('.candidate-id-display');
-                    if (idTag) {
-                        idTag.innerText = "Your Candidate ID: " + data.candidateID;
-                    }
-                }
-                successDiv.classList.remove('hidden');
-
-            } else if (formType === 'Client_Briefing') {
-                form.classList.add('hidden');
-                document.getElementById('client-form-success').classList.remove('hidden');
-
-            } else if (formType === 'Newsletter') {
-                form.reset();
-                submitBtn.innerText = originalBtnText;
-                submitBtn.disabled = false;
-                document.getElementById('newsletter-success').classList.remove('hidden');
-            }
+            const finalID = data.candidateID || data.generatedID || fallbackID;
+            showSuccess(form, formType, finalID, submitBtn, originalBtnText);
         })
         .catch(error => {
-            console.error('Submission error:', error);
-            // Fallback gracefully if browser cross-origin limits block JSON parsing
-            if (formType === 'Executive_Registry') {
-                form.classList.add('hidden');
-                document.getElementById('ceo-form-success').classList.remove('hidden');
-            } else if (formType === 'Client_Briefing') {
-                form.classList.add('hidden');
-                document.getElementById('client-form-success').classList.remove('hidden');
-            } else if (formType === 'Newsletter') {
-                form.reset();
-                submitBtn.innerText = originalBtnText;
-                submitBtn.disabled = false;
-                document.getElementById('newsletter-success').classList.remove('hidden');
-            }
+            // If network takes too long or CORS prevents JSON reading, still show success with fallback ID
+            showSuccess(form, formType, fallbackID, submitBtn, originalBtnText);
         });
+    }
+
+    function showSuccess(form, formType, refID, submitBtn, originalBtnText) {
+        if (formType === 'Executive_Registry') {
+            form.classList.add('hidden');
+            const successDiv = document.getElementById('ceo-form-success');
+            const idTag = successDiv.querySelector('.candidate-id-display');
+            if (idTag) {
+                idTag.innerText = "Reference ID: " + refID;
+            }
+            successDiv.classList.remove('hidden');
+
+        } else if (formType === 'Client_Briefing') {
+            form.classList.add('hidden');
+            const successDiv = document.getElementById('client-form-success');
+            const idTag = successDiv.querySelector('.brief-id-display');
+            if (idTag) {
+                idTag.innerText = "Reference ID: " + refID;
+            }
+            successDiv.classList.remove('hidden');
+
+        } else if (formType === 'Newsletter') {
+            form.reset();
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+            document.getElementById('newsletter-success').classList.remove('hidden');
+        }
     }
 </script>
