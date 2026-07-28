@@ -465,109 +465,165 @@
         </div>
     </div>
 
-    <!-- ================================================================= -->
-    <!-- MODAL 2: CLIENT BRIEFING REQUEST FORM -->
-    <!-- ================================================================= -->
-    <div id="client-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 md:p-6 overflow-y-auto">
-        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-gold-400/30 bg-navy-800 shadow-2xl relative max-h-[90vh] flex flex-col">
+   <!-- ================================================================= -->
+<!-- MODAL 2: CLIENT BRIEFING FORM (REQUEST A CEO / C-SUITE MANDATE) -->
+<!-- ================================================================= -->
+<div id="client-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 md:p-6 overflow-y-auto">
+    <div class="glass-panel w-full max-w-3xl rounded-2xl border border-white/15 bg-navy-800 shadow-2xl relative max-h-[90vh] flex flex-col">
+        
+        <!-- Header -->
+        <div class="p-6 md:p-8 border-b border-white/10 flex items-center justify-between sticky top-0 bg-navy-800/95 backdrop-blur z-10">
+            <div>
+                <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Board & Investor Intake</span>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Request Executive Talent Briefing</h2>
+            </div>
+            <button onclick="closeModal('client-modal')" class="text-slate-muted hover:text-white text-2xl p-2">&times;</button>
+        </div>
+
+        <!-- Form Body -->
+        <div class="p-6 md:p-8 overflow-y-auto custom-scroll space-y-8 text-sm">
             
-            <!-- Header -->
-            <div class="p-6 md:p-8 border-b border-white/10 flex items-center justify-between sticky top-0 bg-navy-800/95 backdrop-blur z-10">
-                <div>
-                    <span class="text-xs font-semibold uppercase tracking-widest text-blue-400">Hiring Authority Access</span>
-                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Request a CEO Briefing</h2>
-                </div>
-                <button onclick="closeModal('client-modal')" class="text-slate-muted hover:text-white text-2xl p-2">&times;</button>
-            </div>
-
-            <!-- Form Body -->
-            <div class="p-6 md:p-8 overflow-y-auto custom-scroll space-y-8 text-sm">
+            <form id="client-briefing-form" onsubmit="handleFormSubmit(event, 'Client_Briefing')">
                 
-                <form id="client-briefing-form" onsubmit="handleFormSubmit(event, 'Client_Briefing')">
-                    
-                    <!-- 1. Contact -->
-                    <div class="space-y-4">
-                        <h3 class="text-xs uppercase tracking-widest font-semibold text-blue-400 border-b border-white/10 pb-2">1. Your Details</h3>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Full Name *</label>
-                                <input type="text" name="Full Name" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Work Email *</label>
-                                <input type="email" name="Email" required placeholder="name@firm.com" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
-                            </div>
+                <!-- 1. Client Contact Details -->
+                <div class="space-y-4">
+                    <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">1. Client Contact Details</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Your Full Name *</label>
+                            <input type="text" name="Full Name" required placeholder="e.g. David Vance" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                         </div>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Firm / Fund / Company Name *</label>
-                                <input type="text" name="Firm Name" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Your Capacity *</label>
-                                <select name="Client Capacity" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
-                                    <option value="">Select Role...</option>
-                                    <option value="VC / PE Partner">VC / PE Partner</option>
-                                    <option value="Board Chair / NED">Board Chair / Non-Exec Director</option>
-                                    <option value="Founder / CEO">Founder / Current CEO</option>
-                                    <option value="Head of Talent">Head of Talent / Operations</option>
-                                </select>
-                            </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Work Email *</label>
+                            <input type="email" name="Work Email" required placeholder="d.vance@fund.com" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                         </div>
                     </div>
-
-                    <!-- 2. Mandate Specs -->
-                    <div class="space-y-4 pt-6">
-                        <h3 class="text-xs uppercase tracking-widest font-semibold text-blue-400 border-b border-white/10 pb-2">2. Mandate Parameters</h3>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Leadership Needed *</label>
-                                <select name="Leadership Needed" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
-                                    <option value="">Select Role Type...</option>
-                                    <option value="Scale-Up CEO">Full-Time Scale-Up CEO</option>
-                                    <option value="Interim / Turnaround">Interim / Fractional CEO</option>
-                                    <option value="Board Chair / NED">Board Chair / NED</option>
-                                    <option value="Exec Committee">Executive Committee (CFO, CRO, CPO)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-light mb-1">Urgency / Timeframe *</label>
-                                <select name="Search Urgency" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-blue-400 outline-none">
-                                    <option value="">Select Urgency...</option>
-                                    <option value="Active Search">Active Need (Next 30 Days)</option>
-                                    <option value="Planning Phase">Planning Phase (1–3 Months)</option>
-                                    <option value="Pipeline Benchmarking">Pipeline Exploration / Benchmarking</option>
-                                </select>
-                            </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Direct Phone *</label>
+                            <input type="tel" name="Phone" required placeholder="+44 20 7946 0912" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Company / Operating Entity *</label>
+                            <input type="text" name="Company Name" required placeholder="e.g. Apex Capital / Portfolio Co" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                         </div>
                     </div>
-
-                    <!-- 3. Expectation & Consent -->
-                    <div class="space-y-4 pt-6">
-                        <div class="p-4 rounded bg-navy-900 border border-white/10 text-xs text-slate-light leading-relaxed">
-                            <strong class="text-white font-semibold">What happens next:</strong> On our 15-minute briefing call, a <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase</a> Senior Partner will showcase 2–3 anonymized candidate snapshots matching your exact stage and sector.
-                        </div>
-
-                        <label class="flex items-start space-x-3 cursor-pointer">
-                            <input type="checkbox" name="Newsletter Opt In" value="Yes" checked class="mt-1 accent-gold-400">
-                            <span class="text-xs text-slate-light">Subscribe to the Portfolio Leadership Brief (monthly talent snapshots & comp benchmarks).</span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-8 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
-                        Schedule Briefing & Review Talent
-                    </button>
-                </form>
-
-                <div id="client-form-success" class="hidden text-center py-12 space-y-4">
-                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
-                    <h3 class="text-2xl font-serif font-bold text-white">Briefing Request Received</h3>
-                    <p class="text-slate-light text-sm max-w-md mx-auto mb-6">Thank you. A senior partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> is reviewing your mandate criteria.</p>
                 </div>
 
+                <!-- 2. Mandate Scope & Core Objective -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">2. Mandate Scope & Core Objective</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Target Leadership Role *</label>
+                            <select name="Target Role" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <option value="">Select Target Role...</option>
+                                <option value="Chief Executive Officer (CEO)">Chief Executive Officer (CEO)</option>
+                                <option value="Chief Operating Officer (COO / MD)">Chief Operating Officer (COO / MD)</option>
+                                <option value="Board Chair / Non-Executive Director">Board Chair / Non-Executive Director</option>
+                                <option value="Interim / Turnaround CEO">Interim / Turnaround CEO</option>
+                                <option value="Other Executive Leadership">Other C-Suite (CFO, CRO, CPO)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Ownership / Capital Backing Stage *</label>
+                            <select name="Ownership & Stage" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <option value="">Select Backing Type...</option>
+                                <option value="Private Equity (LBO / Growth)">Private Equity (LBO / Growth)</option>
+                                <option value="Venture Capital (Series A-D)">Venture Capital (Series A–D)</option>
+                                <option value="Founder Owned / Bootstrapped">Founder Owned / Bootstrapped</option>
+                                <option value="Public / Listed Company">Public / Listed Corporation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-light mb-1">Primary Value Creation Objective *</label>
+                        <select name="Core Mandate Objective" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            <option value="">Select Primary Objective...</option>
+                            <option value="Scale GTM & ARR ($10M to $50M+)">Scale GTM & ARR ($10M to $50M+)</option>
+                            <option value="Operational Turnaround & EBITDA Improvement">Operational Turnaround & Margin Improvement</option>
+                            <option value="Founder Succession & Professionalization">Founder Transition & Scale-Up</option>
+                            <option value="M&A Roll-up & Post-Merger Integration">M&A Roll-up & Integration</option>
+                            <option value="Exit Preparation (IPO / Strategic Sale)">Exit Preparation (IPO / Strategic Sale)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 3. Location, Work Model & Compensation -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">3. Location, Work Model & Compensation</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Primary Location / HQ *</label>
+                            <input type="text" name="Location & HQ" required placeholder="e.g. London, UK or Remote (US East)" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Work Model Expectations *</label>
+                            <select name="Work Model" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <option value="">Select Work Model...</option>
+                                <option value="On-Site Primary (4-5 days/wk)">On-Site Primary (4–5 days/week)</option>
+                                <option value="Hybrid (2-3 days on-site)">Hybrid (2–3 days on-site)</option>
+                                <option value="Remote with Quarterly Travel">Remote with Travel as needed</option>
+                                <option value="Open / Candidate Dependent">Open / Dependent on Candidate Level</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Target Base Salary Band *</label>
+                            <select name="Target Compensation" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <option value="">Select Base Salary Band...</option>
+                                <option value="£150k–£225k / $200k–$300k">£150k–£225k / $200k–$300k Base</option>
+                                <option value="£225k–£350k / $300k–$450k">£225k–£350k / $300k–$450k Base</option>
+                                <option value="£350k+ / $450k+">£350k+ / $450k+ Base</option>
+                                <option value="Interim / Day-Rate Structure">Interim / Day-Rate Structure</option>
+                                <option value="To Be Determined">To Be Determined</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-light mb-1">Search Urgency / Target Start *</label>
+                            <select name="Timeline / Urgency" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <option value="">Select Target Start...</option>
+                                <option value="Immediate (Interim / High Priority)">Immediate / Critical Priority</option>
+                                <option value="Within 30–60 Days">Within 30–60 Days</option>
+                                <option value="Next Quarter / Pipeline Planning">Next Quarter / Pipeline Planning</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-light mb-1">Key Requirements / Mandate Overview (Optional)</label>
+                        <textarea name="Role Overview" rows="2" placeholder="Outline specific criteria, key challenges, or preferred background..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none resize-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- 4. Discretion Pledge & Consent -->
+                <div class="space-y-4 pt-4">
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" name="Newsletter Opt In" value="Yes" checked class="mt-1 accent-gold-400">
+                        <span class="text-xs text-slate-light">Subscribe to the C-Suite Market Briefing (monthly PE/VC compensation trends & board moves).</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-6 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
+                    Submit Search Brief
+                </button>
+            </form>
+
+            <div id="client-form-success" class="hidden text-center py-12 space-y-4">
+                <div class="w-12 h-12 bg-gold-400/20 text-gold-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
+                <h3 class="text-2xl font-serif font-bold text-white">Search Brief Received</h3>
+                
+                <p class="brief-id-display text-gold-400 font-mono text-sm uppercase tracking-widest bg-navy-900 inline-block px-4 py-2 rounded border border-white/10 font-bold"></p>
+                
+                <p class="text-slate-light text-sm max-w-md mx-auto">Your mandate parameters have been logged. A Managing Partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> will review candidate availability and reach out within 24 hours.</p>
             </div>
+
         </div>
     </div>
+</div>
 
 
 <!-- ================================================================= -->
