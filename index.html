@@ -233,32 +233,51 @@
                 </div>
                 <button onclick="closeModal('ceo-modal')" class="text-slate-muted hover:text-white text-2xl p-2">&times;</button>
             </div>
-
+    
             <!-- Form Body -->
             <div class="p-6 md:p-8 overflow-y-auto custom-scroll space-y-8 text-sm">
                 
                 <form id="ceo-registry-form" onsubmit="handleFormSubmit(event, 'Executive_Registry')">
                     
-                    <!-- 1. Contact & Verification -->
+                    <!-- 1. Executive Identity & Discretion -->
                     <div class="space-y-4">
-                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">1. Contact & Verification</h3>
+                        <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">1. Executive Identity & Discretion</h3>
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs text-slate-light mb-1">Full Name *</label>
-                                <input type="text" name="Full Name" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <input type="text" name="Full Name" required placeholder="e.g. Sarah Jenkins" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs text-slate-light mb-1">Confidential Email *</label>
-                                <input type="email" name="Email" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                <input type="email" name="Email" required placeholder="direct@domain.com" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-xs text-slate-light mb-1">LinkedIn Profile URL *</label>
-                            <input type="url" name="LinkedIn URL" required placeholder="https://linkedin.com/in/..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+    
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Direct Phone *</label>
+                                <input type="tel" name="Phone" required placeholder="+44 7123 456789" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">LinkedIn Profile <span class="text-slate-muted font-normal">(Optional)</span></label>
+                                <!-- Changed type="url" to text to prevent mobile browser https:// validation issues -->
+                                <input type="text" name="LinkedIn URL" placeholder="linkedin.com/in/username" class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-light mb-1">Notice Period *</label>
+                                <select name="Notice Period" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
+                                    <option value="">Select Notice...</option>
+                                    <option value="Immediate / Available Now">Immediate / Available Now</option>
+                                    <option value="1 Month">1 Month</option>
+                                    <option value="3 Months">3 Months</option>
+                                    <option value="6 Months">6 Months</option>
+                                    <option value="Specific Date / Post-Exit">Specific Date / Post-Exit</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- 2. Leadership Level & Sector -->
+    
+                    <!-- 2. Leadership Level & Domain Expertise -->
                     <div class="space-y-4 pt-4">
                         <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">2. Leadership Level & Domain Expertise</h3>
                         <div class="grid md:grid-cols-2 gap-4">
@@ -286,25 +305,21 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 3. Executive Scoreboard -->
+    
+                    <!-- 3. Executive Scoreboard & Scale -->
                     <div class="space-y-4 pt-4">
                         <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">3. Executive Scoreboard & Scale</h3>
                         <div class="grid md:grid-cols-2 gap-4">
-                           <div>
+                            <div>
                                 <label class="block text-xs text-slate-light mb-1">Peak Scale Managed *</label>
                                 <select name="Peak Scale" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
                                     <option value="">Select Scale & Metric...</option>
-                                    
-                                    <!-- ARR (Subscription & SaaS) -->
                                     <optgroup label="Annual Recurring Revenue (ARR)" class="bg-navy-800 text-gold-400 font-semibold">
                                         <option value="Sub-$10M ARR" class="text-white font-normal">Sub-$10M ARR</option>
                                         <option value="$10M–$50M ARR" class="text-white font-normal">$10M – $50M ARR</option>
-                                        <option value="$10M–$50M ARR" class="text-white font-normal">$50M – $150M ARR</option>
+                                        <option value="$50M–$150M ARR" class="text-white font-normal">$50M – $150M ARR</option>
                                         <option value="$150M+ ARR" class="text-white font-normal">$150M+ ARR</option>
                                     </optgroup>
-                            
-                                    <!-- Revenue / P&L (Services, Industrial, Corporate) -->
                                     <optgroup label="Overall Revenue / P&L" class="bg-navy-800 text-gold-400 font-semibold">
                                         <option value="Sub-$10M Revenue" class="text-white font-normal">Sub-$10M Revenue / P&L</option>
                                         <option value="$10M–$50M Revenue" class="text-white font-normal">$10M – $50M Revenue / P&L</option>
@@ -347,8 +362,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 4. Location & Mobility -->
+    
+                    <!-- 4. Location & Geographic Mobility -->
                     <div class="space-y-4 pt-4">
                         <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">4. Location & Geographic Mobility</h3>
                         <div class="grid md:grid-cols-2 gap-4">
@@ -367,7 +382,8 @@
                             </div>
                         </div>
                     </div>
-                   <!-- 5. Target Mandate & Compensation Parameters -->
+    
+                    <!-- 5. Target Mandate & Compensation Parameters -->
                     <div class="space-y-4 pt-4">
                         <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 border-b border-white/10 pb-2">
                             5. Target Mandate & Compensation Parameters
@@ -384,7 +400,7 @@
                                     <option value="Interim / Fractional C-Suite">Interim / Fractional CEO/COO</option>
                                 </select>
                             </div>
-                    
+    
                             <div>
                                 <label class="block text-xs text-slate-light mb-1">Primary Incentive Preference *</label>
                                 <select name="Incentive Preference" required class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none">
@@ -397,7 +413,7 @@
                                 </select>
                             </div>
                         </div>
-                    
+    
                         <!-- Multi-Currency Optional Base Floor -->
                         <div>
                             <label class="block text-xs text-slate-light mb-1">
@@ -411,40 +427,39 @@
                                 <option value="Board / Advisory Fee Primary">Board Retainer / Advisory Fee Primary</option>
                             </select>
                         </div>
-                    
+    
                         <div>
                             <label class="block text-xs text-slate-light mb-1">Key Successes or Mandate Preferences (Optional)</label>
                             <textarea name="Executive Highlights" rows="2" placeholder="Brief note on notable exits, ARR growth velocity, or specific mandate requirements..." class="w-full bg-navy-900 border border-white/15 rounded p-3 text-white focus:border-gold-400 outline-none resize-none"></textarea>
                         </div>
                     </div>
-
+    
                     <!-- 6. Discretion Pledge & Consent -->
                     <div class="space-y-4 pt-4">
                         <div class="p-4 rounded bg-navy-900 border border-white/10 text-xs text-slate-light leading-relaxed">
                             <strong class="text-white font-semibold">Strict Discretion Pledge:</strong> Your identity is never published or shared without your explicit consent. Profiles are anonymized. A <a href="https://www.fletcherchase.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 underline">Fletcher Chase</a> Partner will contact you before sharing details with any hiring board.
                         </div>
-
+    
                         <label class="flex items-start space-x-3 cursor-pointer">
                             <input type="checkbox" name="Newsletter Opt In" value="Yes" checked class="mt-1 accent-gold-400">
                             <span class="text-xs text-slate-light">Subscribe me to the CEO Talent Briefing (monthly C-suite market intelligence, board moves, and compensation benchmarks).</span>
                         </label>
                     </div>
-
+    
                     <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-6 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
                         Submit Confidential Application
                     </button>
                 </form>
-
+    
                 <div id="ceo-form-success" class="hidden text-center py-12 space-y-4">
                     <div class="w-12 h-12 bg-gold-400/20 text-gold-400 rounded-full flex items-center justify-center mx-auto text-2xl">✓</div>
                     <h3 class="text-2xl font-serif font-bold text-white">Application Received</h3>
                     <p class="text-slate-light text-sm max-w-md mx-auto">Your details have been added to our private ledger. A partner at <a href="https://www.fletcherchase.com" target="_blank" class="text-gold-400 underline">Fletcher Chase</a> will reach out directly when a matching mandate arises.</p>
                 </div>
-
+    
             </div>
         </div>
     </div>
-
 
     <!-- ================================================================= -->
     <!-- MODAL 2: CLIENT BRIEFING REQUEST FORM -->
