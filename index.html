@@ -13,6 +13,10 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- CLOUDFLARE TURNSTILE SCRIPT -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -473,7 +477,10 @@
                             <span class="text-xs text-slate-light">Subscribe me to the CEO Talent Briefing (monthly C-suite market intelligence, board moves, and compensation benchmarks).</span>
                         </label>
                     </div>
-    
+              
+                    <!-- ADD CLOUDFLARE TURNSTILE WIDGET HERE -->
+                    <div class="cf-turnstile my-4" data-sitekey="0x4AAAAAAFUaGvL2flS8OI6K"></div>
+                    
                     <button type="submit" class="w-full bg-gold-400 text-navy-900 font-semibold py-4 rounded mt-6 hover:bg-gold-500 transition text-sm uppercase tracking-wider">
                         Submit Confidential Application
                     </button>
@@ -705,6 +712,14 @@
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalBtnText = submitBtn.innerText;
 
+        // 1. Grab and validate the Cloudflare Turnstile token from the form
+        const turnstileToken = form.querySelector('[name="cf-turnstile-response"]')?.value;
+
+        if (!turnstileToken) {
+            alert("Please complete the security verification challenge before submitting.");
+            return;
+        }
+
         submitBtn.innerText = "Encrypting & Submitting...";
         submitBtn.disabled = true;
 
@@ -713,6 +728,9 @@
 
         const formData = new FormData(form);
         formData.append('FormType', formType);
+        
+        // Append Turnstile response token explicitly to form data
+        formData.append('turnstileToken', turnstileToken);
 
         // Ensure unchecked checkbox sends "No" explicitly
         if (!formData.has('Newsletter Opt In')) {
@@ -729,10 +747,17 @@
         .then(data => {
             const finalID = data.candidateID || data.generatedID || fallbackID;
             showSuccess(form, formType, finalID, submitBtn, originalBtnText);
+            // Reset Turnstile widget if available
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
         })
         .catch(error => {
             // If network takes too long or CORS prevents JSON reading, still show success with fallback ID
             showSuccess(form, formType, fallbackID, submitBtn, originalBtnText);
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
         });
     }
 
